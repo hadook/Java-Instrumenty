@@ -1,14 +1,12 @@
 package PK.Instruments;
 
-/**
- * Hello world!
- *
- */
+import PK.Instruments.Controller.ContextManager;
+
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
-        //dummy comment
+    	ContextManager contextManager = ContextManager.getInstance();
+    	contextManager.run();
     }
 }
