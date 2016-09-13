@@ -1,39 +1,52 @@
 package PK.Instruments.Model.Clients;
 
-import PK.Instruments.Model.Users.User;
+import PK.Instruments.Data.Database;
 
 public class ClientsRepository implements IClientsRepository{
-
-//	UnitOfWork _unitOfWork;
 	
-	public ClientsRepository()
-	{
-//		_unitOfWork = unitOfWork;
-	}
+	private Database _data = Database.getInstance();
 	
 	public void add(Client client)
 	{
-//	    _unitOfWork.getSession().save(client);
+		_data.clients.add(client);
 	}
 
 	public void remove(Client client) 
 	{
-//		 _unitOfWork.getSession().delete(client);
-	}
-	
-	public void update(Client client) 
-	{
-//		 _unitOfWork.getSession().update(client);
+		_data.clients.remove(client);
 	}
 	
 	public Client findById(int id)
 	{
-//		return _unitOfWork.getSession().get(Client.class, id);
+		for(Client client : _data.clients)
+		{
+			if(client.getId() == id)
+				return client;
+		}
+		
+		throw new NullPointerException("Nie odnaleziono klienta o id: "+id);
 	}
-	
-	public Client findByUser(User user)
+		
+	public Client findByNameAndSurname(String name, String surname)
 	{
-//		return _unitOfWork.getSession().byNaturalId(Client.class).using("_user",user).load();
+		for(Client client : _data.clients)
+		{
+			if(client.getName().equals(name) && client.getSurname().equals(surname))
+				return client;
+		}
+		
+		throw new NullPointerException("Nie odnaleziono klienta o imieniu: " + name + " i nazwisku: " + surname);
 	}
-
+/*	
+	public Client findByEmail(String email)
+	{
+		for(Client client : _data.clients)
+		{
+			if(client.compareEmail(email))
+				return client;
+		}
+		
+		throw new NullPointerException("Nie odnaleziono klienta o emailu: " + email);
+	}
+*/
 }

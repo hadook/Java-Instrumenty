@@ -1,41 +1,44 @@
 package PK.Instruments.Model.Users;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Base64;
-import java.util.Random;
+import PK.Instruments.Data.Database;
 
 public class UsersManager implements IUsersManager
 {
-//	UnitOfWork _unitOfWork;
+	private Database _data = Database.getInstance();
 	
 	public UsersManager()
 	{
-//		_unitOfWork = unitOfWork;
+		
+	}
+	
+	public User initiate(String email)
+	{
+		for(User user : _data.users)
+		{
+			if(user.getEmail() == email)
+				return user;
+		}
+		return null;
 	}
 	
 	public User register(String email, String password)
 	{
-//		User user = _unitOfWork.getSession().byNaturalId(User.class).using("_email",email).load();
+		User user = initiate(email);
 		
-		if(user != null) //when user with such email already exists
+		if(user != null) // if user email already exists
 			return null; //don't allow any registration
 		
 		//otherwise let him register and keep logged
 	    user = new User(email);
-//	    user.setSalt(generateSalt());
-//	    user.setHashedPassword(getHash(password+user.getSalt()));
-	     
-//	    _unitOfWork.getSession().save(user);
+	    user.setPassword(password);
 	    
 	    return user;
 	}
 	
 	public User login(String email, String password)
 	{
-//		User user = _unitOfWork.getSession().byNaturalId(User.class).using("_email",email).load();
+		User user = initiate(email);
+		
 		if(user == null) //can't find user with such email
 			return null;
 		
@@ -45,34 +48,9 @@ public class UsersManager implements IUsersManager
 		return user;
 	} 
 	
-	public String generateSalt()
-	{
-		final Random random = new SecureRandom();
-		byte[] salt = new byte[32];
-		random.nextBytes(salt);
-		return Base64.getEncoder().encodeToString(salt);
-	}
-	
-	public String getHash(String str)
-	{
-		try 
-		{
-			MessageDigest md = MessageDigest.getInstance("SHA-512");
-			byte[] aMessageDigest = new byte[32];
-			md.update(str.getBytes(StandardCharsets.UTF_8));
-			aMessageDigest = md.digest();
-
-			return new String(aMessageDigest,StandardCharsets.UTF_8);
-		}
-		catch (NoSuchAlgorithmException e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
-	
 	private boolean isPasswordValid(User user, String password)
 	{
-		if(getHash(password+user.getSalt()).equals(user.getHashedPassword()))
+		if(user.getPassword().equals(password))
 			return true;
 		
 		return false;

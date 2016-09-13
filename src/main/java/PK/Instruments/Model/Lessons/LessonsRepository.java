@@ -1,36 +1,82 @@
 package PK.Instruments.Model.Lessons;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import PK.Instruments.Model.Clients.Client;
+import PK.Instruments.Data.Database;
 
 public class LessonsRepository implements ILessonsRepository{
-	
-//	UnitOfWork _unitOfWork;
-	
-	public LessonsRepository()
-	{
-//		_unitOfWork = unitOfWork;
-	}
+
+	private Database _data = Database.getInstance();
 	
 	public void add(Lesson lesson)
 	{
-//	    _unitOfWork.getSession().save(lesson);
+		_data.lessons.add(lesson);
 	}
 
 	public void remove(Lesson lesson) 
 	{
-//		 _unitOfWork.getSession().delete(patient);
+		_data.lessons.remove(lesson);
 	}
 	
 	public Lesson findById(int id)
 	{
-//		return _unitOfWork.getSession().get(Patient.class, id);
+		for(Lesson lesson : _data.lessons)
+		{
+			if(lesson.getId() == id)
+				return lesson;
+		}
+		
+		throw new NullPointerException("Nie odnaleziono kursu o id: "+id);
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Lesson> findByOwner(Client client)
+	public Lesson findByInstrumentName(String instrumentName)
 	{
-//		return _unitOfWork.getSession().createQuery("select p from Patient p where _owner: ownerId").setParameter("ownerId",client.getId()).getResultList();
+		for(Lesson lesson : _data.lessons)
+		{
+			if(lesson.getInstrumentName() == instrumentName)
+				return lesson;
+		}
+		
+		throw new NullPointerException("Nie odnaleziono kursu z instrumentem: "+ instrumentName);
 	}
+
+	public Lesson findByDay(String day)
+	{
+		for(Lesson lesson : _data.lessons)
+		{
+			if(lesson.getDay() == day)
+				return lesson;
+		}
+		
+		throw new NullPointerException("Nie odnaleziono kursu w dniu: "+ day);
+	}
+
+	public Lesson findByClassroom(int classroom)
+	{
+		for(Lesson lesson : _data.lessons)
+		{
+			if(lesson.getClassroom() == classroom)
+				return lesson;
+		}
+		
+		throw new NullPointerException("Nie odnaleziono kursu w sali: "+ classroom);
+	}
+	
+	public Lesson[] findByOwnerId(int ownerId)
+	{
+		ArrayList<Lesson> lessons = new ArrayList<Lesson>();
+		for(Lesson lesson : _data.lessons)
+		{
+			if(lesson.getOwnerId() == ownerId)
+				lessons.add(lesson);
+		}
+		
+		return lessons.toArray(new Lesson[lessons.size()]);
+	}
+	
+	public Lesson[] findAll()
+	{
+		return _data.lessons.toArray(new Lesson[_data.lessons.size()]);
+	}
+	
 }

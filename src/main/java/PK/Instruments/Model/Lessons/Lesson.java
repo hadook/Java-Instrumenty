@@ -1,56 +1,23 @@
 package PK.Instruments.Model.Lessons;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import PK.Instruments.Model.Item;
 
-import PK.Instruments.Model.Clients.Client;
-
-@Entity
-@SequenceGenerator(initialValue = 1, allocationSize=1, name = "lessons_ids", sequenceName = "lessons_ids")
-@Table(name="lessons")
-public class Lesson
-{
-	@Id @GeneratedValue(strategy = GenerationType.AUTO, generator = "lessons_ids")
-	@Column(name = "id")
-	private int _id;
-	
-	@Column(name = "instrumentName")
+public class Lesson extends Item{
+	private static int _idLesson;
 	private String _instrumentName;
-	
-	@Column(name = "genre")
-	private String _genre;
-	
-	@Column(name = "level")
 	private String _level;
-	
-	@Column(name = "clasroom")
 	private int _classroom;
-	
-	@Column(name = "day")
 	private String _day;
+	private int _ownerId;
 	
-	@ManyToOne
-	@JoinColumn(name = "owner_id")
-	private Client _owner;
-	
-	public Lesson()
+	public Lesson(String instrumentName, String level, int classroom, String day, int ownerId)
 	{
-	}
-	
-	public Lesson(String instrumentName,String genre, String level, int classroom, String day)
-	{
+		_id = _idLesson++;
 		_instrumentName = instrumentName;
-		_genre = genre;
 		_level = level;
 		_classroom = classroom;
 		_day = day;
+		_ownerId = ownerId;
 	}
 	
 	public String getInstrumentName()
@@ -63,16 +30,6 @@ public class Lesson
 		_instrumentName = instrumentName;
 	}
 	
-	public String getGenre()
-	{
-		return _genre;
-	}
-	
-	public void setGenre(String genre)
-	{
-		_genre = genre;
-	}
-	
 	public String getLevel()
 	{
 		return _level;
@@ -81,16 +38,6 @@ public class Lesson
 	public void setLevel(String level)
 	{
 		_level = level;
-	}
-
-	public int getClassroom()
-	{
-		return _classroom;
-	}
-	
-	public void setClassroom(int classroom)
-	{
-		_classroom = classroom;
 	}
 	
 	public String getDay()
@@ -103,14 +50,24 @@ public class Lesson
 		_day = day;
 	}
 	
-	public Client getOwner()
+	public int getClassroom()
 	{
-		return _owner;
+		return _classroom;
 	}
 	
-	public void setOwner(Client owner)
+	public void setClassroom(int classroom)
 	{
-		_owner = owner;
+		_classroom = classroom;
+	}
+	
+	public int getOwnerId()
+	{
+		return _ownerId;
+	}
+	
+	public void setOwnerId(int ownerId)
+	{
+		_ownerId = ownerId;
 	}
 	
 	public String toString()
@@ -118,11 +75,8 @@ public class Lesson
 		return 
 				Integer.toString(_id) + " " + 
 				"instrument name: "+ _instrumentName + " " +
-				"genre: "+ _genre + " " +
 				"level: "+ _level + " " +
 				"day: "+ _day + " " +
 				"classroom: "+ _classroom + " ";
 	}
-	
-	
 }

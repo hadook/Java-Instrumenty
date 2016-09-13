@@ -97,8 +97,8 @@ public class Model {
 		IClientsRepository clientsRepository = new ClientsRepository();
 		Client client = clientsRepository.findByUser(user);
 		
-		Lesson lesson = new Lesson(instrumentName,level,level,Integer.parseInt(classroom),day);
-		lesson.setOwner(client);
+		Lesson lesson = new Lesson(instrumentName,level,Integer.parseInt(classroom),day,ownerId);
+		lesson.setOwnerId(client);
 		client.addLesson(lesson);
 		
 		ILessonsRepository lessonsRepository = new LessonsRepository();
