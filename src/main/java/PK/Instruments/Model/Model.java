@@ -92,12 +92,12 @@ public class Model {
 		return lessons;
 	}
 	
-	public void createLesson(User user,String instrumentName,String genre,String level,String classroom,String day)
+	public void createLesson(User user,String instrumentName,String level,String classroom,String day)
 	{
 		IClientsRepository clientsRepository = new ClientsRepository();
 		Client client = clientsRepository.findByUser(user);
 		
-		Lesson lesson = new Lesson(instrumentName,genre,level,Integer.parseInt(classroom),day);
+		Lesson lesson = new Lesson(instrumentName,level,level,Integer.parseInt(classroom),day);
 		lesson.setOwner(client);
 		client.addLesson(lesson);
 		

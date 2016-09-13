@@ -60,12 +60,12 @@ public class ClientController {
     private void addLessonAction()
     {      
         String instrumentName = this.addCourse.getCourseData(0);
-        String genre = this.addCourse.getCourseData(1);
-        String level = this.addCourse.getCourseData(2);
-        String classroom = this.addCourse.getCourseData(3);
-        String day = this.addCourse.getCourseData(4);
+//      String genre = this.addCourse.getCourseData(1);
+        String level = this.addCourse.getCourseData(1);
+        String classroom = this.addCourse.getCourseData(2);
+        String day = this.addCourse.getCourseData(3);
     	
-        model.createLesson(user,instrumentName,genre,level,classroom,day);
+        model.createLesson(user,instrumentName,level,classroom,day);
     	this.addCourse.setVisibility(false);
     	this.welcomeView.setVisibility(true);
     }
