@@ -1,6 +1,11 @@
 package PK.Instruments.Model.Clients;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import PK.Instruments.Model.Item;
+import PK.Instruments.Model.Users.User;
+import PK.Instruments.Model.Lessons.Lesson;
 
 public class Client extends Item{
 	private static int _idCounter;
@@ -8,6 +13,8 @@ public class Client extends Item{
 	private String _surname;
 	private String _adress;
 	private String _phone;
+	private User _user;
+	private List<Lesson> _lessons = new ArrayList<Lesson>();
 	
 	public Client(String name, String surname, String adress, String phone)
 	{
@@ -17,6 +24,16 @@ public class Client extends Item{
 		_adress = adress;
 		_phone = phone;
 //		_email = email;
+	}
+	
+	public Client(String name, String surname, String adress, String phone, User user)
+	{
+		_id = _idCounter++;
+		_name = name;
+		_surname = surname;
+		_adress = adress;
+		_phone = phone;
+		_user = user;
 	}
 	
 	public String getName()
@@ -58,6 +75,14 @@ public class Client extends Item{
 	{
 		_phone = phone;
 	}
+	
+	public User getUser() {
+        return _user;
+    }
+
+    public void setUser(User user) {
+        _user = user;
+    }
 /*	
 	public String getEmail()
 	{
@@ -73,7 +98,21 @@ public class Client extends Item{
 	{
 		return _email.equals(email);
 	}
-*/	
+*/
+    public List<Lesson> getLessons() {
+        return _lessons;
+    }
+
+    public void addLesson(Lesson lesson) {
+        _lessons.add(lesson);
+        lesson.setOwner(this);
+    }
+
+    public void removeLesson(Lesson lesson) {
+    	_lessons.remove(lesson);
+    	lesson.setOwner(null);
+    }
+	
 	public String toString()
 	{
 		return 

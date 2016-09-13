@@ -3,6 +3,7 @@ package PK.Instruments.Model.Teachers;
 import java.util.ArrayList;
 
 import PK.Instruments.Data.Database;
+import PK.Instruments.Model.Users.User;
 
 public class TeachersRepository implements ITeachersRepository{
 	
@@ -38,6 +39,17 @@ public class TeachersRepository implements ITeachersRepository{
 		}
 		
 		throw new NullPointerException("Nie odnaleziono nauczyciela o imieniu: " + name + " i nazwisku: " + surname);
+	}
+	
+	public Teacher findByUser(User user)
+	{
+		for(Teacher teacher: _data.teachers)
+		{
+			if(teacher.getUser().equals(user))
+				return teacher;
+		}
+		
+		throw new NullPointerException("Nie odnaleziono uzytkownika.");
 	}
 	
 	public Teacher[] findAll()

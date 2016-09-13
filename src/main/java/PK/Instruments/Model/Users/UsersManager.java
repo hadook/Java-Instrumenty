@@ -11,6 +11,16 @@ public class UsersManager implements IUsersManager
 		
 	}
 	
+	public void add(User user)
+	{
+		_data.users.add(user);
+	}
+
+	public void remove(User user) 
+	{
+		_data.users.remove(user);
+	}
+	
 	public User initiate(String email)
 	{
 		for(User user : _data.users)
@@ -47,6 +57,17 @@ public class UsersManager implements IUsersManager
 		
 		return user;
 	} 
+	
+	public User findById(int id)
+	{
+		for(User user : _data.users)
+		{
+			if(user.getId() == id)
+				return user;
+		}
+		
+		throw new NullPointerException("Nie odnaleziono nauczyciela o id: "+id);
+	}
 	
 	private boolean isPasswordValid(User user, String password)
 	{

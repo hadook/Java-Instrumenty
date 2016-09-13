@@ -97,13 +97,14 @@ public class Model {
 		IClientsRepository clientsRepository = new ClientsRepository();
 		Client client = clientsRepository.findByUser(user);
 		
+		int ownerId = client.getId();
 		Lesson lesson = new Lesson(instrumentName,level,Integer.parseInt(classroom),day,ownerId);
-		lesson.setOwnerId(client);
+		lesson.setOwner(client);
 		client.addLesson(lesson);
 		
 		ILessonsRepository lessonsRepository = new LessonsRepository();
 		lessonsRepository.add(lesson);
 		
-		clientsRepository.update(client);
+//		clientsRepository.update(client);
 	}
 }

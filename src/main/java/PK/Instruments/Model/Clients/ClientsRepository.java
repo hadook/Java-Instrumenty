@@ -1,6 +1,7 @@
 package PK.Instruments.Model.Clients;
 
 import PK.Instruments.Data.Database;
+import PK.Instruments.Model.Users.User;
 
 public class ClientsRepository implements IClientsRepository{
 	
@@ -36,6 +37,17 @@ public class ClientsRepository implements IClientsRepository{
 		}
 		
 		throw new NullPointerException("Nie odnaleziono klienta o imieniu: " + name + " i nazwisku: " + surname);
+	}
+	
+	public Client findByUser(User user)
+	{
+		for(Client client: _data.clients)
+		{
+			if(client.getUser().equals(user))
+				return client;
+		}
+		
+		throw new NullPointerException("Nie odnaleziono uzytkownika.");
 	}
 /*	
 	public Client findByEmail(String email)

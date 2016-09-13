@@ -1,6 +1,7 @@
 package PK.Instruments.Model.Teachers;
 
 import PK.Instruments.Model.Item;
+import PK.Instruments.Model.Users.User;
 
 public class Teacher extends Item{
 	private static int _idCounter;
@@ -8,6 +9,7 @@ public class Teacher extends Item{
 	private String _surname;
 	private String _address;
 	private String _phone;
+	private User _user;
 	
 	public Teacher(String name, String surname, String address, String phone)
 	{
@@ -23,6 +25,16 @@ public class Teacher extends Item{
 		_id = _idCounter++;
 		_name = name;
 		_surname = surname;
+	}
+	
+	public Teacher(String name, String surname, String address, String phone, User user)
+	{
+		_id = _idCounter++;
+		_name = name;
+		_surname = surname;
+		_address = address;
+		_phone = phone;
+		_user = user;
 	}
 	
 	public String getName()
@@ -64,6 +76,14 @@ public class Teacher extends Item{
 	{
 		_phone = phone;
 	}
+	
+	public User getUser() {
+        return _user;
+    }
+
+    public void setUser(User user) {
+        _user = user;
+    }
 	
 	public String toString()
 	{

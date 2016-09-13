@@ -19,6 +19,13 @@ public class User extends Item
 		_email = email;
 	}
 	
+	public User(String email, String password)
+	{
+		_id = _idCounter++;
+		_email = email;
+		_password = password;
+	}
+	
 	public String getEmail() 
 	{
 	      return _email;

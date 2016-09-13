@@ -1,6 +1,7 @@
 package PK.Instruments.Model.Lessons;
 
 import PK.Instruments.Model.Item;
+import PK.Instruments.Model.Clients.Client;
 
 public class Lesson extends Item{
 	private static int _idLesson;
@@ -9,6 +10,7 @@ public class Lesson extends Item{
 	private int _classroom;
 	private String _day;
 	private int _ownerId;
+	private Client _owner;
 	
 	public Lesson(String instrumentName, String level, int classroom, String day, int ownerId)
 	{
@@ -18,6 +20,16 @@ public class Lesson extends Item{
 		_classroom = classroom;
 		_day = day;
 		_ownerId = ownerId;
+	}
+	
+	public Lesson(String instrumentName, String level, int classroom, String day, Client owner)
+	{
+		_id = _idLesson++;
+		_instrumentName = instrumentName;
+		_level = level;
+		_classroom = classroom;
+		_day = day;
+		_owner = owner;
 	}
 	
 	public String getInstrumentName()
@@ -68,6 +80,16 @@ public class Lesson extends Item{
 	public void setOwnerId(int ownerId)
 	{
 		_ownerId = ownerId;
+	}
+	
+	public Client getOwner()
+	{
+		return _owner;
+	}
+	
+	public void setOwner(Client owner)
+	{
+		_owner = owner;
 	}
 	
 	public String toString()
