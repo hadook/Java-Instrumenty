@@ -8,5 +8,4 @@ public interface IClientsRepository extends IRepository<Client>{
 	public Client findByNameAndSurname(String name, String surname);
 //	public Client findByEmail(String email);
 	public Client findByUser(User user);
-//	public void update(Client client);
 }

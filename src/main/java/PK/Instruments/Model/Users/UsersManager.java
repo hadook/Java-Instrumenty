@@ -25,7 +25,7 @@ public class UsersManager implements IUsersManager
 	{
 		for(User user : _data.users)
 		{
-			if(user.getEmail() == email)
+			if(user.getEmail().equals(email))
 				return user;
 		}
 		return null;
@@ -41,6 +41,7 @@ public class UsersManager implements IUsersManager
 		//otherwise let him register and keep logged
 	    user = new User(email);
 	    user.setPassword(password);
+	    add(user);
 	    
 	    return user;
 	}

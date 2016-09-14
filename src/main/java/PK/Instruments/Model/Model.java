@@ -104,7 +104,5 @@ public class Model {
 		
 		ILessonsRepository lessonsRepository = new LessonsRepository();
 		lessonsRepository.add(lesson);
-		
-//		clientsRepository.update(client);
 	}
 }

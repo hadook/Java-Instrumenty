@@ -47,6 +47,16 @@ public class ExampleLoader {
 		Lesson lesson3 = new Lesson("perkusja","poczatkujacy",013,"wtorek",client3);
 		Lesson lesson4 = new Lesson("kontrabas","zaawansowany",006,"poniedzialek",client4);
 		
+		client0.addLesson(lesson0);
+		client0.addLesson(lesson2);
+		client0.addLesson(lesson4);
+		client1.addLesson(lesson1);
+		client2.addLesson(lesson2);
+		client3.addLesson(lesson3);
+		client4.addLesson(lesson4);
+		client4.addLesson(lesson1);
+		
+		
 		IUsersManager users = new UsersManager();
 		ITeachersRepository teachers = new TeachersRepository();
 		IClientsRepository clients = new ClientsRepository();
@@ -81,33 +91,4 @@ public class ExampleLoader {
 		lessons.add(lesson3);
 		lessons.add(lesson4);
 	}
-/*	
-	public static void loadTeachersData(TeachersRepository teachers)
-	{
-		teachers.add(new Teacher("Ferdynand","Kiepski"));
-		teachers.add(new Teacher("Waldemar","Kiepski"));
-		teachers.add(new Teacher("Arnold","Boczek"));
-		teachers.add(new Teacher("Marian","Pazdzioch"));
-		teachers.add(new Teacher("Halina","Kiepska"));
-	}
-	
-	public static void loadLessonsData(LessonsRepository lessons)
-	{
-		lessons.add(new Lesson("gitara","poczatkujacy",107,"poniedzialek",0));
-		lessons.add(new Lesson("fortepian","zaawansowany",108,"sroda",1));
-		lessons.add(new Lesson("gitara","ekspert",107,"czwartek",2));
-		lessons.add(new Lesson("perkusja","poczatkujacy",013,"wtorek",3));
-		lessons.add(new Lesson("kontrabas","zaawansowany",006,"poniedzialek",4));
-	}	
-
-	public static void loadClientsData(ClientsRepository clients)
-	{
-		clients.add(new Client("Harry","Potter", "Privet Drive 4", "123456789"));
-		clients.add(new Client("Syriusz","Black", "Grimmauld Place 12", "456724192"));
-		clients.add(new Client("Ronald","Weasly", "Nora", "123443312"));
-		clients.add(new Client("Severus","Snape", "Spinner's End", "789423902"));
-		clients.add(new Client("Aberforth","Dumbledore", "The Hog's Head, Hogsmeade", "700345723"));
-
-	}
-*/
 }

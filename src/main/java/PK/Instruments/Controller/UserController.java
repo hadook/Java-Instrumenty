@@ -42,13 +42,20 @@ public class UserController {
     	
     	User user = this.model.loginUser(email,haslo);
     	Teacher teacher = this.model.findTeacherByUser(user); //probuje znalezc nauczyciela z takim id jak user
+//    	System.out.println("przed if.");
     	if(user != null)
     	{
     		this.loginView.setVisibility(false);
     		if(teacher == null)
-    			ContextManager.changeContext(user,"client");
+    		{
+//   			System.out.println("przed clientem.");
+    			ContextManager.changeContext(user,"client");   			
+    		}
     		else
+    		{
+//				System.out.println("przed teacherem.");
     			ContextManager.changeContext(user,"teacher");
+    		}
     		
     		return;
     	}
